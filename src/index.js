@@ -19,7 +19,7 @@ class Index extends Component {
 					id : '1',
 					subject : '1',
 					subscription : '이햐햐햐햐햐1',
-					answer : 'nodejs1'
+					answer : 'ANSWER'
 				}, {	
 					id : '2',
 					subject : '1',

@@ -8,11 +8,10 @@ class KeyItem extends Component {
 
 
 	render(){
-		console.log(this.props.show)
 
 		return (
 				<div className='keyItem'>
-					{this.props.show ? this.props.word : 'ㅋㅋ'}
+					<button onClick={this.props.addPressSet} value={this.props.word}>{this.props.show ? this.props.word : '빈칸'}</button>
 				</div>			
 			)
 	}
