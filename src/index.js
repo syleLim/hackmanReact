@@ -48,7 +48,9 @@ class Index extends Component {
 	}
 
 	render() {
-		return this.state.isMain ? (<Main subjects={this.state.subjects} onChangePage={this.changePage.bind(this)}/>) : (<Quiz questionSet={this.state.questionSet} />)
+		const selectedQuestionSet = this.state.questionSet.filter((e) => e.subject === this.state.selectedSubject)
+
+		return this.state.isMain ? (<Main subjects={this.state.subjects} onChangePage={this.changePage.bind(this)}/>) : (<Quiz questionSet={selectedQuestionSet}/>)
 	}
 	
 
