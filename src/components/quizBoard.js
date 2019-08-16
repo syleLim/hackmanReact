@@ -17,8 +17,13 @@ class QuizBoard extends Component {
 	checkWinner(answerSet, flag){
 		const winner = this.props.question.answer.split('').every((e) => answerSet.indexOf(e) !== -1) ? flag : 'nono'
 		console.log(winner)
-	}
 
+		if(winner !== 'nono') {
+			return true
+		}else{
+			return false
+		}
+	}
 	addPressSet(event){
 		const newPressSet = update(this.state.pressSet, {$push : [event.target.value]})
 
@@ -26,17 +31,36 @@ class QuizBoard extends Component {
 			pressSet : newPressSet
 		})
 
-		this.checkWinner(newPressSet, 'player')
+		if (!this.checkWinner(newPressSet, 'player')) {
+			this.addAiPressSet()
+		}
 	}
 
-	addAiPressSet(event){
-		const newAiPressSet = update(this.state.aiPressSet, {$push : [event.target.value]})
+	aiChoiceWord(){
+		/*
+			have to chagne - this time choice only correct word
+		*/
+		let word = ''
+
+		this.props.question.answer.split('').forEach((e)=>{
+			word = this.state.aiPressSet.indexOf(e) === -1 ? e : word
+		})
+
+		return word
+	}
+
+	addAiPressSet(){
+		const word = this.aiChoiceWord()
+
+		const newAiPressSet = update(this.state.aiPressSet, {$push : [word]})
 
 		this.setState({
 			aiPressSet : newAiPressSet
 		})
 
 		this.checkWinner(newAiPressSet, 'Ai')
+
+		console.log('ai', newAiPressSet)
 	}
 
 
